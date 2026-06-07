@@ -20,9 +20,12 @@ I'm a developer who loves **creating and learning** — from building full-stack
 
 #### 📊 GitHub Stats
 
-![Ronit's GitHub Stats](https://github-readme-stats.vercel.app/api?username=ronits2407&show_icons=true&theme=midnight-purple&hide_border=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ronits2407&layout=compact&theme=midnight-purple&hide_border=true)
-![GitHub Streak](https://streak-stats.demolab.com?user=ronits2407&theme=midnight-purple&hide_border=true)
+<p align="left">
+  <img src="https://github-readme-stats.vercel.app/api?username=ronits2407&show_icons=true&theme=midnight-purple&hide_border=true&count_private=true" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ronits2407&layout=compact&theme=midnight-purple&hide_border=true" height="165" />
+</p>
+
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=ronits2407&theme=midnight-purple&hide_border=true)](https://git.io/streak-stats)
 
 ---
 
