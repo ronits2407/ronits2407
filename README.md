@@ -1,16 +1,40 @@
-## Hi there 👋
+### Hey! I'm Ronit Sonawane 👋
 
-<!--
-**ronits2407/ronits2407** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I'm a developer who loves **creating and learning** — from building full-stack web apps to exploring AI agent tooling and systems programming. I enjoy turning ideas into working projects, whether it's a social impact platform or tinkering with blockchain tooling.
 
-Here are some ideas to get you started:
+🌱 Currently learning **Next.js** and **React** — building things as I go!
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
+
+#### 🚀 Some of my projects
+
+- [**ShareBites**](https://github.com/ronits2407/cs50-final-project) — A web app to share leftover food in your area, reducing waste and helping people. My CS50 final project, built with Python, Flask, SQLite, and Bootstrap.
+
+- [**Snake Game**](https://github.com/ronits2407/snake-game) — A professional Snake Game implementation in C with advanced features.
+
+- [**AgentKit**](https://github.com/ronits2407/agentkit) — A toolkit giving AI agents access to crypto wallets and onchain functionality, powered by the 0xGasless AgentKit SDK. Built with TypeScript.
+
+- [**Umiam Digital Hub**](https://github.com/ronits2407/Umiamdigitalhub) — A web app to monitor and control Umiam's centralised management system.
+
+---
+
+#### 📊 GitHub Stats
+
+![Ronit's GitHub Stats](https://github-readme-stats.vercel.app/api?username=ronits2407&show_icons=true&theme=midnight-purple&hide_border=true)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ronits2407&layout=compact&theme=midnight-purple&hide_border=true)
+![GitHub Streak](https://streak-stats.demolab.com?user=ronits2407&theme=midnight-purple&hide_border=true)
+
+---
+
+#### 🛠️ Tech I work with
+
+`Python` `Flask` `C` `TypeScript` `React` `Next.js` `HTML/CSS` `Bootstrap` `SQLite`
+
+---
+
+#### 📬 Connect with me
+
+- [LinkedIn](https://www.linkedin.com/in/ronit-sonawane-441421337/)
+- [X / Twitter](https://x.com/ronits2407)
+- [Instagram](https://www.instagram.com/ronits2407/)
+- [ORCID](https://orcid.org/0009-0004-4804-7075)
