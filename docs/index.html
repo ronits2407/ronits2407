@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b111b">
+  <title>Ronit Sonawane — interactive ASCII portrait</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b111b; --ink:#eaf4ee; --accent:#6ed9c1; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(circle at 40% 10%,#17343b 0,#0b111b 50%); color:var(--ink); font:16px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    main { width:min(1120px,calc(100% - 36px)); margin:0 auto; padding:32px 0 48px; }
+    nav { display:flex; justify-content:space-between; gap:20px; align-items:center; color:#8cb3b4; }
+    a { color:var(--accent); text-decoration:none; } a:hover,a:focus-visible { text-decoration:underline; }
+    .panel { margin-top:28px; border:1px solid #2f6465; border-radius:24px; background:#0e1b29; box-shadow:0 28px 70px #0006; overflow:hidden; }
+    .top { padding:15px 22px; border-bottom:1px solid #264a50; color:#83bcb7; font-size:13px; letter-spacing:.1em; }
+    .layout { display:grid; grid-template-columns:minmax(0, 570px) 1fr; gap:28px; align-items:center; padding:24px; }
+    canvas { width:100%; height:auto; display:block; background:#08141d; border:1px solid #224b50; border-radius:14px; cursor:crosshair; touch-action:none; }
+    h1 { font:700 clamp(36px,5vw,68px)/1.05 system-ui,sans-serif; letter-spacing:-.05em; margin:0 0 16px; }
+    .eyebrow { color:var(--accent); letter-spacing:.18em; font-size:14px; }
+    p { color:#b7cccf; max-width:32ch; }
+    button { margin-top:20px; border:1px solid #3c8782; border-radius:10px; background:#12363a; color:#e7fff4; font:inherit; padding:10px 15px; cursor:pointer; }
+    button:hover,button:focus-visible { background:#1b5557; }
+    .hint { color:#8ba9ac; font-size:13px; }
+    @media (max-width:790px) { .layout { grid-template-columns:1fr; } .copy { padding:0 5px 10px; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body><main>
+  <nav><span>RONIT.EXE / PORTRAIT.ASC</span><a href="https://github.com/ronits2407">← GitHub profile</a></nav>
+  <section class="panel" aria-label="Interactive ASCII portrait">
+    <div class="top">MOVE YOUR CURSOR OVER THE PORTRAIT · CLICK OR TAP TO CHANGE COLOUR</div>
+    <div class="layout">
+      <canvas id="portrait" width="570" height="570" role="img" aria-label="ASCII art portrait of Ronit Sonawane from his selfie"></canvas>
+      <div class="copy"><div class="eyebrow">HELLO, I'M</div><h1>Ronit<br>Sonawane.</h1><p>I build, debug and learn across web, data and systems.</p><button id="palette" type="button">Switch palette</button><p class="hint">The portrait reacts to your cursor. Tap or use the button to change its colours.</p></div>
+    </div>
+  </section>
+</main>
+<script>
+const rows = ["i1fLLLLffLLLCLCLiiiii;;;;;;iiii;;;;;;;;;;;;;;::::;;;","LtffLLLfLLLLLLCLiiii;;i;;;;i;;;;;iii;;;;;;;;;;;::,. ","8CfLLfLLLLLLCLCLiiii;;i;ii;::,,:,::;i;;;;;;;:,      ","LffLLLLLLLLLCLCL11iiiiiiii:,,,.     .:;;:,.      ...","ttfffLLLLLLLLCCL111iiiii:,.,,.         ..   ,,.  .,,","itLfLLfLLLLCCCCL111i::,:   :.           ,,,....  .,,","ttffLLLLLLLLCCCL111;:,     .             .,,..   .,.","1fLLLLLCCCLCCCCL111;:.                    ,:,,.  .,,","ffLLLLCGGCCCCCCL11i;,                     .,::,  .,,","1tLLLLCGGCCCCCCL11i,                       .,:,  .,,","i1LLfLGGGGCCCLLL1;,                         ,::   ,,","i1LLLLG0GCCCCLCL1.        .:;:,.            .,:   ,,","iiLLLLCCCCCCCCL1:        :i111i;,           .,;   ,,","iiLLLLLLCCCGCLCi       .ifftt1t1;:.          ,:   :,",";1LffLLLCCG0CLCL,     .tLCLftttt11i:,        ,:   :,","i1ffLLfLG000GLCt:.    1L0GCLfftfft1ttt111    ,;  .;:","G@LLLffLG000GLCf     :LLf11tfLLLftfLLLCG0:   ,:  .C0","0@LfLLfLCCGGGLLL:    fL;    ,itfffLCCCCG01 . .t,  t1","itLfffLLLCCCCLfL:   .tt1:,.   ,;1i:,,,,t01   ,01  :.","ttLffLLLLLLLLfLL1,. .i1i1i:,,..:;:     ,ft   ,:   :,","@@LfLLLfLLLLLLLLti1,iCti:. ..,:,;:,,:i11ft   1f.  ,.","@@LfLfLLLLLLLLLL1;tiL0Cf1:.,.;i1i;.. :ttLt: ;i;   ::","@@LfLLLLLLLLLLLL1if;C80Cf1ii111LL1:,.;;tti;:;ii.  ;i","@8tfffLfCGCLfffL11i:C8GCLtffftCLCffii1LGL11::i;.  i,","8G11tffL88GLffLLt1;iL8GLLLftLCCL0CLLtfC0Cfi:,;;.  :,","@8ftfLff@0CCCLLLtttif0CCLti;f:;ttCfLLLG0CLi:.;;,  ,,","LC1i1111tfLGGLLL1LCt1GCLL1tt;.:1.i11LCGGL1i, ;i,  :;",";,:;,::::1fLCttL1tfiiLLLftt1;,:;ifftLGG0tii..:;,  ,;",":::.,,..,i1f1tfL111i;tfft:,,:,,,,iLLLCGC11; .:;,  ,;",",.......,.;i1fLC1i11;i1f1  ,,,:;i::tLCCtft:,.ii:  .,","   . . ..,:1fLfL1i11:;;i;,:iiii;;:.:LLfit;,..;:.  ..",". . .. ,.,1tffLf1ii1:::;i1t1;:;tCf,;f11,.,,..:::   .",".  .. .,::::1fff1ii1t.,ittti,  :tCti11; ,it;.i1;  :1"," .   ..,::,ittff1;;1C, :ttfti;i1fLLf1;i,,iL: 1f1  iG","   .  ...,;1tti,   ,C1  ,;;:;;ifCCf1::1.,1i: ttt  ;L","    ..,,..,::,.    :G1,    .,,:i1t;.,11.:i;: 1ff  .:"," ..,,:.   ..       fC1;.      ..,. :i11.:tti.itf   ,","  .,.    ..  .   ,;Lfti:,        ,ftttt:;t1; ;11   ,",",,,.            ;1;tft1;;:    .:1LC .1t::iii 1f1   ,","                1L;ttt1ii;:..,1fLCt   1:,;;: :1:    ","                f011ttt1ii;:;1fLLC:    ,,,.  .;.    ","                C8C1ttt111iiitLLLL      .,.  .1;    ","                0@@f111t1111tfLLLt        .,  1;    ","                G@@811111111tffLfi.        .  1;   ,","                f@@@8111t111ttff1:,,.        ,1;   .","                1@@@@8ttfttttfft1:::;        ;1;   .","                :@@@@@@CLLfftfft1;::t,       ,i:   .","                .0@@@@@@8Cfftfft1i,1Ci        ::   .","                 C@@@@@@@@GLffLfti;@0L.       ..   .","            ,    L@@@@@@@@@@80GCCG@@@G.       ...   ","            .    t@@@@@@@@@@@@@@@@@@@0        ..    ","            .    t@@@@@@@@@@@@@@@@@@@0        .    ,"];
+const canvas = document.getElementById('portrait');
+const ctx = canvas.getContext('2d');
+const paletteButton = document.getElementById('palette');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let pointer = null, palette = 0, last = 0;
+const colors = [
+  ['#4d9ba8','#79d6c7','#efd8ae'],
+  ['#795ec2','#c17fe8','#f5c0e3'],
+  ['#5274c4','#84b7ed','#f1d99e']
+];
+function draw(time) {
+  ctx.fillStyle = '#08141d'; ctx.fillRect(0,0,570,570);
+  ctx.font = '12px ui-monospace, SFMono-Regular, Consolas, monospace';
+  ctx.textBaseline = 'top';
+  const stepX=9.45, stepY=10.15, ox=41, oy=20;
+  for (let y=0;y<rows.length;y++) for(let x=0;x<rows[y].length;x++) {
+    const ch=rows[y][x]; if(ch===' ') continue;
+    let px=ox+x*stepX, py=oy+y*stepY;
+    let glow=0;
+    if(pointer) {
+      const dx=px-pointer.x,dy=py-pointer.y,dist=Math.hypot(dx,dy);
+      glow=Math.max(0,1-dist/118);
+      const wave=reducedMotion.matches?0:Math.sin(dist/12-time/170)*glow*5;
+      px+=dx/(dist||1)*glow*5;
+      py+=wave;
+    }
+    const density='  .,:;i1tfLCG08@'.indexOf(ch)/15;
+    const ramp=colors[palette];
+    ctx.fillStyle=glow>.16?'#fff7d8':ramp[density>.67?2:density>.34?1:0];
+    ctx.globalAlpha=Math.min(1,.46+density*.52+glow*.30);
+    ctx.fillText(ch,px,py);
+  }
+  ctx.globalAlpha=1;
+  if(pointer) { ctx.strokeStyle='#6ed9c177'; ctx.beginPath();ctx.arc(pointer.x,pointer.y,118,0,Math.PI*2);ctx.stroke(); }
+}
+function tick(time) { if(time-last>30) {draw(time);last=time;} if(!reducedMotion.matches) requestAnimationFrame(tick); }
+function locate(e) { const r=canvas.getBoundingClientRect(); pointer={x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}; if(reducedMotion.matches)draw(0); }
+canvas.addEventListener('pointermove',locate);
+canvas.addEventListener('pointerleave',()=>{pointer=null;if(reducedMotion.matches)draw(0)});
+canvas.addEventListener('pointerdown',()=>{palette=(palette+1)%colors.length;draw(0)});
+paletteButton.addEventListener('click',()=>{palette=(palette+1)%colors.length;draw(0)});
+reducedMotion.addEventListener('change',()=>{draw(0);if(!reducedMotion.matches)requestAnimationFrame(tick)});
+draw(0);if(!reducedMotion.matches)requestAnimationFrame(tick);
+</script></body></html>
