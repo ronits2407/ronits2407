@@ -1,71 +1,96 @@
-<p align="center">
-  <a href="https://ronits2407.github.io/ronits2407/" title="Open the interactive ASCII portrait">
-    <img src="assets/ronit-ascii.gif" alt="Animated ASCII portrait of Ronit Sonawane, made from his own selfie" width="1000">
-  </a>
-</p>
+<h1 align="center">Ronit Sonawane</h1>
 
-<p align="center">
-  <a href="https://ronits2407.github.io/ronits2407/">Move your cursor through the portrait ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://github.com/ronits2407?tab=repositories">Browse all repositories</a>
-</p>
+<p align="center"><strong>FPGA datapaths · memory systems · C++ search · real-time software</strong></p>
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=18&duration=2800&pause=800&color=79D6C7&center=true&vCenter=true&width=650&height=35&lines=Building+for+the+web%2C+data+and+systems.;Learning+by+making+things+work." alt="Building for the web, data and systems. Learning by making things work.">
-</p>
+<p align="center"><a href="https://ronits2407.github.io/ronits2407/" title="Explore the interactive ASCII portrait"><img src="assets/ronit-ascii.gif" width="240" alt="Animated ASCII portrait of Ronit; opens a cursor-reactive version"></a></p>
 
-<p align="center">
-  <a href="#featured-work">Featured work</a> ·
-  <a href="#open-source">Open source</a> ·
-  <a href="#toolbox">Toolbox</a> ·
-  <a href="#say-hello">Say hello</a>
-</p>
+I build systems across hardware and software, with an interest in the boundaries where data changes form: network packets into order-book state, cache misses into prefetch decisions, vectors into searchable storage, and events into live interfaces.
 
-I'm Ronit, a computer science student at IIT Guwahati. I like building practical software and getting into the details: APIs, real time systems, browser tools, and the occasional C++ rabbit hole.
+## Selected engineering work
 
-### Featured work
+### 01 / FPGA limit order book
 
-| Project | What I've worked on |
-| --- | --- |
-| [CivicPulse](https://github.com/ronits2407/civic-pulse) | Civic issue reporting with an AI triage pipeline, citizen map, and municipal dashboard. `Next.js` `React Native` `TypeScript` |
-| [Coding Club IITG · CCW](https://github.com/Coding-Club-IITG/CCW) | Contest rooms and tournament workflows, including [persistent forfeit timers](https://github.com/Coding-Club-IITG/CCW/pull/56) and [Codeforces SDK integration](https://github.com/Coding-Club-IITG/CCW/pull/18). `Next.js` `TypeScript` |
-| [VectorDB](https://github.com/VectorDB-wakawaka/VectorDB) | Contributed [memory-mapped storage](https://github.com/VectorDB-wakawaka/VectorDB/pull/6), [C++20 architecture and tests](https://github.com/VectorDB-wakawaka/VectorDB/pull/4), and [sanitizer CI](https://github.com/VectorDB-wakawaka/VectorDB/pull/3) to an exact kNN engine. `C++` `CMake` |
-| [CP-API](https://github.com/ronits2407/cp-api) | A TypeScript SDK that unifies competitive programming profiles, contests, submissions, and problems across platforms. `TypeScript` `Vitest` |
-| [CF Grind Tracker](https://github.com/ronits2407/cf-grind-tracker) | A Valorant-themed Chrome extension for tracking Codeforces practice, solves, and friends. `JavaScript` `Chrome MV3` |
-| [PDF Slide Flattener](https://github.com/ronits2407/PDF-Slide-Flattener) | A browser tool for removing intermediate presentation overlays from PDF slide decks. `JavaScript` `PDF.js` |
+<sub>Source repository is private; public link forthcoming.</sub><br>
+<img src="assets/tech/verilog.svg" height="23" alt="Verilog" title="Verilog"> <img src="assets/tech/c.svg" height="23" alt="C" title="C"> <img src="assets/tech/python.svg" height="23" alt="Python" title="Python">
 
-<details>
-  <summary><b>More builds and experiments</b></summary>
-  <br>
+**Architecture.** On a Nexys A7-100T, a Verilog-2001 pipeline receives RMII Ethernet frames, validates IPv4/UDP and MoldUDP64/ITCH messages, and crosses into the book core through an asynchronous event FIFO. An RV32IM supervisor and UART telemetry expose control and book state.
 
-- [TraceAI](https://github.com/ronits2407/csesPs4) — a CLI that captures failed commands and streams AI debugging suggestions.
-- [Umiam Digital Hub](https://github.com/ronits2407/Umiamdigitalhub) — a Flask hostel portal for events, notices, and complaints.
-- [AURORA](https://github.com/Aurora-PS-IITG/aurorafinal) — a collaborative, LLM-assisted notification pipeline with behavioral segmentation and scheduling.
-- [PolyChat](https://github.com/ronits2407/PolyChat) — a multi-model chat app with conversation history.
-- [Minecraft Server](https://github.com/ronits2407/minecraft-server) — custom Java BedWars gameplay and server tooling.
+**Book mechanics.** Full 64-bit order IDs resolve through a set-associative hash table with a collision stash. A free list allocates slots; slot and price-level memories apply Add, Execute, Cancel, Delete, and Replace events. The best-bid/offer path maintains top prices and quantities. Feed gaps or malformed messages invalidate the book until reset and full replay. Exchange-provided executions update the book; order matching happens upstream.
 
-</details>
+```mermaid
+flowchart LR
+  A[ITCH order event] --> B[Decode and validate]
+  B --> C[Order ID hash and stash]
+  C --> D[Slot table and free list]
+  D --> E[Price-level RAM]
+  E --> F[Best bid and offer]
+```
 
-### Open source
+**Evidence.** Physical-board checks covered Ethernet ingest, book updates, fail-stop behavior, and reset/replay. UART captures also verified bid/ask price, quantity, active-order count, and selected checksum-error counters.
 
-- **pandas:** fixed [pivot table margins](https://github.com/pandas-dev/pandas/pull/66234) and worked on [CachedAccessor deprecation](https://github.com/pandas-dev/pandas/pull/66235).
-- **Astro:** exported an [AstroComponentLogger type](https://github.com/withastro/astro/pull/17313) and updated the [documentation](https://github.com/withastro/docs/pull/14203).
-- **Competitive programming tools:** improved [CPH language detection](https://github.com/agrawal-d/cph/pull/687) and added [type checking in minigit CI](https://github.com/YO-WHATS-UP2/minigit/pull/53).
+---
 
-Each linked change above was merged upstream. [More pull requests →](https://github.com/pulls?q=is%3Apr+author%3Aronits2407)
+### 02 / Multi-Lookahead Offset Prefetching in gem5
 
-### Toolbox
+<sub>Paper implementation · source repository is private; public link forthcoming.</sub><br>
+<img src="assets/tech/cplusplus.svg" height="23" alt="C++" title="C++"> <img src="assets/tech/python.svg" height="23" alt="Python" title="Python">
 
-`TypeScript` `JavaScript` `Python` `C++` `Java` `Next.js` `React` `Node.js` `Flask` `MongoDB` `PostgreSQL` `GitHub Actions`
+**Architecture.** I implemented a new L1 data-cache prefetcher in gem5, based on Shakerinava et al.'s *Multi-Lookahead Offset Prefetching*. It trains on eligible L1-D misses, not on every memory access or clock cycle.
 
-<details>
-  <summary><b>GitHub activity widget</b></summary>
-  <br>
-  <img src="https://streak-stats.demolab.com?user=ronits2407&theme=transparent&hide_border=true" alt="GitHub contribution streak card">
-</details>
+**Algorithm.** A 256-entry access-map table tracks recent history within 64-block regions. Candidate offsets are scored separately at 16 lookahead levels; every 500 eligible misses, the prefetcher selects winners for those levels. Future misses generate page-safe requests in lookahead order, with duplicate candidates suppressed before queue insertion.
 
-### Say hello
+```mermaid
+flowchart LR
+  A[Eligible L1-D miss] --> B[64-block access map]
+  B --> C[Score offsets at 16 lookaheads]
+  C -->|every 500 misses| D[Select winners]
+  D --> E[Page-safe deduplicated prefetches]
+```
 
-[LinkedIn](https://www.linkedin.com/in/ronit-sonawane-441421337/) · [X](https://x.com/ronits2407) · [ORCID](https://orcid.org/0009-0004-4804-7075)
+**Evidence.** The gem5 build and all comparison runs completed for sequential, backward, and mixed synthetic streams against no prefetcher and BOP. This evaluation checks integration and behavior on those patterns; broader DPC3-scale validation remains future work.
 
-<sub>Portrait made from my own photo. Inspired by the [awesome GitHub profile README collection](https://github.com/abhisheknaiidu/awesome-github-profile-readme); typing animation by [readme-typing-svg](https://github.com/DenverCoder1/readme-typing-svg).</sub>
+---
+
+### 03 / [VectorDB](https://github.com/VectorDB-wakawaka/VectorDB)
+
+<img src="assets/tech/cplusplus.svg" height="23" alt="C++" title="C++"> <img src="assets/tech/cmake.svg" height="23" alt="CMake" title="CMake">
+
+**Public baseline.** In this C++20 collaboration, I contributed a growable, disk-backed memory-mapped arena, the library/test architecture, and sanitizer CI. The current mainline loads `.fvecs`/`.ivecs` datasets and performs exact kNN using squared L2 distance and a bounded top-k heap; an exportable CMake target makes it usable from another C++ project.
+
+**Current research branch.** Work in progress explores capacity-constrained hierarchical clustering, posting-list balance, overlap for boundary vectors, and a dynamic delta chosen from a storage-bloat budget. This experimental index is separate from the exact-search mainline.
+
+**Evidence.** Catch2 includes a SIFT-small integration check that recovers the full ground-truth top 100 with exact search, alongside storage and search unit tests. The research branch is still under evaluation.
+
+---
+
+### 04 / [Coding Club IITG · multiplayer contests](https://github.com/Coding-Club-IITG/CCW)
+
+<img src="assets/tech/typescript.svg" height="23" alt="TypeScript" title="TypeScript"> <img src="assets/tech/redis.svg" height="23" alt="Redis" title="Redis"> <img src="assets/tech/nextjs.svg" height="23" alt="Next.js" title="Next.js">
+
+**Architecture.** I contribute to CCW's competitive-programming platform: live Blitz and Arena rooms, 1v1 and tournament formats, participant state, and Codeforces synchronization. MongoDB holds persistent contest entities; Redis coordinates runtime state and publishes events; Server-Sent Events update connected clients.
+
+**My merged work.** Contest UI and permissions, SDK integration, SSE delivery fixes, and persistent forfeit timers. A disconnected player can return to a room without resetting the timer, while room activity stays visible to participants.
+
+**Evidence.** These features are represented by merged changes in the public CCW repository. The platform is a Coding Club IITG team project.
+
+---
+
+### 05 / [HABit IITG](https://github.com/Coding-Club-IITG/iitgHABapp)
+
+<img src="assets/tech/react.svg" height="23" alt="React" title="React"> <img src="assets/tech/redis.svg" height="23" alt="Redis" title="Redis"> <img src="assets/tech/postgresql.svg" height="23" alt="PostgreSQL" title="PostgreSQL">
+
+**Product.** Coding Club IITG and the Hostel Affairs Board built HABit for campus hostel workflows. With the Coding Club team, I worked on the HAB dashboard and its hostel-management views.
+
+**Logging path.** I built work around a Redis-backed application-log queue and a worker that batches log records into PostgreSQL. My merged worker fix sanitizes malformed log content before parsing and keeps a failed flush from crashing the worker process.
+
+**Evidence.** The public repository contains the dashboard's boarder, mess, SMC/HMC, cleaning, and laundry views, plus the Redis-to-PostgreSQL logging worker.
+
+---
+
+## Selected upstream contributions
+
+- **pandas** — corrected pivot-table margin behavior in [PR #66234](https://github.com/pandas-dev/pandas/pull/66234).
+- **Astro** — exported the `AstroComponentLogger` type in [PR #17313](https://github.com/withastro/astro/pull/17313).
+- **CPH** — improved case-insensitive file-extension and language detection in [PR #687](https://github.com/agrawal-d/cph/pull/687).
+
+All three changes were merged upstream.
