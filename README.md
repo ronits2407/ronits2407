@@ -19,11 +19,10 @@ I build systems across hardware and software, with an interest in the boundaries
 
 ```mermaid
 flowchart LR
-  A[ITCH order event] --> B[Decode and validate]
-  B --> C[Order ID hash and stash]
-  C --> D[Slot table and free list]
-  D --> E[Price-level RAM]
-  E --> F[Best bid and offer]
+  A[ITCH event] --> B[ID hash + stash]
+  B --> C[Slot store]
+  C --> D[Price levels]
+  D --> E[Best bid / ask]
 ```
 
 **Evidence.** Physical-board checks covered Ethernet ingest, book updates, fail-stop behavior, and reset/replay. UART captures also verified bid/ask price, quantity, active-order count, and selected checksum-error counters.
@@ -41,10 +40,10 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  A[Eligible L1-D miss] --> B[64-block access map]
-  B --> C[Score offsets at 16 lookaheads]
-  C -->|every 500 misses| D[Select winners]
-  D --> E[Page-safe deduplicated prefetches]
+  A[L1-D miss] --> B[Access map]
+  B --> C[16 score lanes]
+  C -->|500 misses| D[Winners]
+  D --> E[Prefetch queue]
 ```
 
 **Evidence.** The gem5 build and all comparison runs completed for sequential, backward, and mixed synthetic streams against no prefetcher and BOP. This evaluation checks integration and behavior on those patterns; broader DPC3-scale validation remains future work.
