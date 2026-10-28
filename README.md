@@ -98,3 +98,10 @@ flowchart LR
 - **CPH** — improved case-insensitive file-extension and language detection in [PR #687](https://github.com/agrawal-d/cph/pull/687).
 
 All four changes were merged upstream.
+
+---
+
+## Problem solving
+
+- **[Codeforces](https://codeforces.com/profile/ronits2407)** — Specialist; 474 distinct problems solved, 35 rated contests, current rating 1531, peak 1547 (checked 29 October 2026).
+- **[Advent of Code 2025](https://adventofcode.com/2025)** — 19 stars across 11 days.
