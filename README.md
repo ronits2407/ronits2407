@@ -2,7 +2,7 @@
 
 <p align="center"><strong>FPGA datapaths · memory systems · C++ search · real-time software</strong></p>
 
-<img align="left" src="assets/portrait.png" width="280" alt="Portrait of Ronit">
+<img align="left" src="assets/ronit-ascii.gif" width="280" alt="Animated ASCII portrait of Ronit">
 
 <h3>Engineering at the hardware–software boundary</h3>
 <p>I build systems where data changes form: network packets into order-book state, cache misses into prefetch decisions, vectors into searchable storage, and events into live interfaces.</p>
