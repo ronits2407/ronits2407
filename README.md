@@ -2,16 +2,13 @@
 
 <p align="center"><strong>FPGA datapaths · memory systems · C++ search · real-time software</strong></p>
 
-<table>
-<tr>
-<td width="42%" align="center" valign="middle"><a href="https://ronits2407.github.io/ronits2407/" title="Explore the interactive ASCII portrait"><img src="assets/ronit-ascii.gif" width="280" alt="Animated ASCII portrait of Ronit; opens a cursor-reactive version"></a></td>
-<td width="58%" valign="middle">
+<img align="left" src="assets/portrait.png" width="280" alt="Portrait of Ronit">
+
 <h3>Engineering at the hardware–software boundary</h3>
 <p>I build systems where data changes form: network packets into order-book state, cache misses into prefetch decisions, vectors into searchable storage, and events into live interfaces.</p>
 <p><strong>Current work</strong><br>FPGA order books · cache prefetching · C++ vector search</p>
-</td>
-</tr>
-</table>
+
+<br clear="all">
 
 ## Selected engineering work
 
