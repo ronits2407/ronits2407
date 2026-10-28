@@ -92,8 +92,9 @@ flowchart LR
 
 ## Selected upstream contributions
 
+- **freeCodeCamp** — removed code styling from hex color values in the client introduction copy in [PR #68591](https://github.com/freeCodeCamp/freeCodeCamp/pull/68591).
 - **pandas** — corrected pivot-table margin behavior in [PR #66234](https://github.com/pandas-dev/pandas/pull/66234).
 - **Astro** — exported the `AstroComponentLogger` type in [PR #17313](https://github.com/withastro/astro/pull/17313).
 - **CPH** — improved case-insensitive file-extension and language detection in [PR #687](https://github.com/agrawal-d/cph/pull/687).
 
-All three changes were merged upstream.
+All four changes were merged upstream.
